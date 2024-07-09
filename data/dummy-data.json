@@ -1,0 +1,11 @@
+{
+    "students": [
+      { "id": 1, "name": "John Doe" },
+      { "id": 2, "name": "Jane Smith" }
+    ],
+    "courses": [
+      { "id": 1, "title": "Mathematics 101" },
+      { "id": 2, "title": "Introduction to Science" }
+    ]
+  }
+  
