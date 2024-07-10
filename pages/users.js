@@ -1,8 +1,8 @@
-// /components/Layout.js
+// /pages/admin/users.js
 import { useSession, signIn } from 'next-auth/react';
-import Sidebar from './Sidebar';
+import Layout from '../../components/Layout';
 
-export default function Layout({ children }) {
+export default function Users() {
   const { data: session, status } = useSession();
 
   if (status === 'loading') {
@@ -15,11 +15,9 @@ export default function Layout({ children }) {
   }
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="flex-1 p-2 bg-gray-100">
-        {children}
-      </main>
-    </div>
+    <Layout>
+      <h1 className="text-3xl font-bold mb-6">Users</h1>
+      {/* Add users management content here */}
+    </Layout>
   );
 }

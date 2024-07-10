@@ -1,26 +1,11 @@
-import { getSession } from 'next-auth/react';
+// /pages/admin/users.js
 import Layout from '../../components/Layout';
 
 export default function Users() {
   return (
     <Layout>
-      <h1 className="text-3xl mb-6">User Management</h1>
-      {/* Add user management content here */}
+      <h1 className="text-3xl font-bold mb-6">Users</h1>
+      {/* Add users management content here */}
     </Layout>
   );
-}
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/auth/signin',
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: { session },
-  };
 }

@@ -1,50 +1,65 @@
-import { signIn } from 'next-auth/react';
-import { useState } from 'react';
+// /pages/auth/signin.js
+import { signIn, useSession } from "next-auth/react";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function SignIn() {
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const router = useRouter();
+  const { data: session } = useSession();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const username = e.target.username.value;
-    const password = e.target.password.value;
-    
-    const result = await signIn('credentials', {
+    setError(null);
+
+    const result = await signIn("credentials", {
       redirect: false,
-      username,
-      password
+      identifier,
+      password,
     });
 
-    if (!result.error) {
-      window.location.href = '/admin/dashboard';
-    } else {
+    if (result.error) {
       setError(result.error);
+    } else {
+      // Redirect to dashboard or any other page on successful sign-in
+      router.push("/admin/dashboard");
     }
   };
 
+  if (session) {
+    router.push("/admin/dashboard");
+    return null; // Prevent rendering of the sign-in page
+  }
+
   return (
-    <div className="flex items-center justify-center h-screen">
-      <form onSubmit={handleSubmit} className="p-6 rounded-lg shadow-lg">
-        <h1 className="text-2xl mb-4">Admin Sign In</h1>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        <input
-          name="username"
-          type="text"
-          placeholder="Username"
-          className="block w-full text-black mb-4 p-2 border border-gray-300 rounded"
-          required
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          className="block w-full text-black mb-4 p-2 border border-gray-300 rounded"
-          required
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded"
-        >
+    <div className="flex justify-center items-center h-screen">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded-lg shadow-md"
+      >
+        <h2 className="text-2xl mb-4">Sign In</h2>
+        {error && <div className="text-red-500 mb-4">{error}</div>}
+        <div className="mb-4">
+          <input
+            type="text"
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
+            placeholder="Email or Username"
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
           Sign In
         </button>
       </form>

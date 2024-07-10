@@ -1,32 +1,60 @@
+// /pages/api/auth/[...nextauth].js
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { compare } from 'bcryptjs'; // Ensure bcryptjs is installed
+
+const users = [
+  {
+    id: 1,
+    username: 'admin',
+    email: 'admin@example.com',
+    password: 'admin', // Store hashed passwords in real applications
+  },
+];
 
 export default NextAuth({
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" }
+        identifier: { label: 'Email or Username', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
-      authorize: async (credentials) => {
-        const fs = require('fs');
-        const path = require('path');
+      async authorize(credentials) {
+        const user = users.find(
+          (user) =>
+            (user.email === credentials.identifier || user.username === credentials.identifier) &&
+            compare(credentials.password, user.password)
+        );
 
-        const filePath = path.resolve(process.cwd(), 'data', 'adminData.json');
-        const fileContents = fs.readFileSync(filePath, 'utf8');
-        const adminData = JSON.parse(fileContents);
-
-        if (credentials.username === adminData.username && credentials.password === adminData.password) {
-          return { id: 1, name: 'Admin' };
+        if (user) {
+          return { id: user.id, name: user.username, email: user.email };
         } else {
-          return null;
+          throw new Error('Invalid credentials');
         }
-      }
-    })
+      },
+    }),
   ],
   pages: {
-    signIn: '/auth/signin',
-    error: '/auth/error'
-  }
+    signIn: '/auth/signin', // Custom sign-in page
+  },
+  session: {
+    strategy: 'jwt',
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id;
+        session.user.email = token.email;
+      }
+      return session;
+    },
+  },
 });
