@@ -1,0 +1,22 @@
+[
+  {
+    "name": "SHS 1",
+    "id": 1,
+    "description": "For All Courses"
+  },
+  {
+    "name": "SHS 2",
+    "id": 2,
+    "description": "For All Courses"
+  },
+  {
+    "name": "SHS 3",
+    "id": 3,
+    "description": "For All Courses"
+  },
+  {
+    "name": "Pre-SHS",
+    "description": "For new students who are seeking admission into SHS",
+    "id": 4
+  }
+]

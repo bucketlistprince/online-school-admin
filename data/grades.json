@@ -1,0 +1,20 @@
+[
+  {
+    "name": "A",
+    "minMarks": 80,
+    "maxMarks": 100,
+    "id": 1
+  },
+  {
+    "name": "B",
+    "minMarks": 60,
+    "maxMarks": 79,
+    "id": 2
+  },
+  {
+    "name": "C",
+    "minMarks": 40,
+    "maxMarks": 59,
+    "id": 3
+  }
+]

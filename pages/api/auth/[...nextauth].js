@@ -1,60 +1,60 @@
-// /pages/api/auth/[...nextauth].js
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { compare } from 'bcryptjs'; // Ensure bcryptjs is installed
+import fs from 'fs';
+import path from 'path';
 
-const users = [
-  {
-    id: 1,
-    username: 'admin',
-    email: 'admin@example.com',
-    password: 'admin', // Store hashed passwords in real applications
-  },
-];
+// Resolve the path to users.json file
+const usersPath = path.resolve('./data/users.json');
+let users = [];
+
+try {
+  // Read and parse the user data
+  users = JSON.parse(fs.readFileSync(usersPath, 'utf8'));
+} catch (error) {
+  console.error("Error reading users.json file:", error);
+}
 
 export default NextAuth({
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
-      credentials: {
-        identifier: { label: 'Email or Username', type: 'text' },
-        password: { label: 'Password', type: 'password' },
-      },
       async authorize(credentials) {
+        // Find user in the JSON file
         const user = users.find(
           (user) =>
-            (user.email === credentials.identifier || user.username === credentials.identifier) &&
-            compare(credentials.password, user.password)
+            user.email === credentials.email &&
+            user.password === credentials.password
         );
 
         if (user) {
-          return { id: user.id, name: user.username, email: user.email };
+          // If user exists and credentials are correct, return user object
+          return {
+            id: user.email,
+            email: user.email,
+            role: user.role
+          };
         } else {
+          // If credentials are invalid
           throw new Error('Invalid credentials');
         }
-      },
-    }),
+      }
+    })
   ],
   pages: {
-    signIn: '/auth/signin', // Custom sign-in page
-  },
-  session: {
-    strategy: 'jwt',
+    signIn: '/auth/signin' // Custom sign-in page
   },
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.email = user.email;
-      }
-      return token;
-    },
     async session({ session, token }) {
+      // Attach user role to session
       if (token) {
-        session.user.id = token.id;
-        session.user.email = token.email;
+        session.user.role = token.role;
       }
       return session;
     },
-  },
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role;
+      }
+      return token;
+    }
+  }
 });

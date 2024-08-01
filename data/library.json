@@ -1,0 +1,23 @@
+[
+    {
+      "id": 1,
+      "subject": "Mathematics",
+      "fileUrl": "/data/uploads/math_book.pdf"
+    },
+    {
+      "id": 2,
+      "subject": "Science",
+      "fileUrl": "/data/uploads/science_lab_manual.pdf"
+    },
+    {
+      "id": 3,
+      "subject": "History",
+      "fileUrl": "/data/uploads/ancient_civilizations.pdf"
+    },
+    {
+      "id": 4,
+      "subject": "English",
+      "fileUrl": "/data/uploads/english_grammar.pdf"
+    }
+  ]
+  

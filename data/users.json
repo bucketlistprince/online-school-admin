@@ -1,7 +1,149 @@
 [
-    {
-      "email": "admin@example.com",
-      "password": "$2a$12$e0.NQls9VR3ihp1aRo8x9.m0A7OGWQQe4F5yQ0kOgkI3jlsH4vhve" 
-    }
-  ]
-  
+  {
+    "id": "1",
+    "username": "John Cash",
+    "email": "johncash@gmail.com",
+    "role": "Teacher",
+    "password": "Johnycass"
+  },
+  {
+    "id": "2",
+    "username": "Alice Smith",
+    "email": "alicesmith@gmail.com",
+    "role": "Admin",
+    "password": "Alicepass"
+  },
+  {
+    "id": "3",
+    "username": "Robert Brown",
+    "email": "robertbrown@gmail.com",
+    "role": "Student",
+    "password": "Robertpass"
+  },
+  {
+    "id": "4",
+    "username": "Emily Johnson",
+    "email": "emilyjohnson@gmail.com",
+    "role": "Teacher",
+    "password": "Emilypass"
+  },
+  {
+    "id": "5",
+    "username": "David Wilson",
+    "email": "davidwilson@gmail.com",
+    "role": "Admin",
+    "password": "Davidpass"
+  },
+  {
+    "id": "6",
+    "username": "Sophia Davis",
+    "email": "sophiadavis@gmail.com",
+    "role": "Student",
+    "password": "Sophia123"
+  },
+  {
+    "id": "7",
+    "username": "James Taylor",
+    "email": "jamestaylor@gmail.com",
+    "role": "Teacher",
+    "password": "Jamestpass"
+  },
+  {
+    "id": "8",
+    "username": "Olivia Anderson",
+    "email": "oliviaanderson@gmail.com",
+    "role": "Admin",
+    "password": "Oliviapass"
+  },
+  {
+    "id": "9",
+    "username": "Michael Martinez",
+    "email": "michaelmartinez@gmail.com",
+    "role": "Student",
+    "password": "Michael123"
+  },
+  {
+    "id": "10",
+    "username": "Isabella Moore",
+    "email": "isabellamoore@gmail.com",
+    "role": "Teacher",
+    "password": "Isabellapass"
+  },
+  {
+    "id": "11",
+    "username": "William Jackson",
+    "email": "williamjackson@gmail.com",
+    "role": "Admin",
+    "password": "Williampass"
+  },
+  {
+    "id": "12",
+    "username": "Mia Thompson",
+    "email": "miathompson@gmail.com",
+    "role": "Student",
+    "password": "Miathompson"
+  },
+  {
+    "id": "13",
+    "username": "Benjamin Harris",
+    "email": "benjaminharris@gmail.com",
+    "role": "Teacher",
+    "password": "Benpass"
+  },
+  {
+    "id": "14",
+    "username": "Charlotte Clark",
+    "email": "charlotteclark@gmail.com",
+    "role": "Admin",
+    "password": "Charlottepass"
+  },
+  {
+    "id": "15",
+    "username": "Ethan Lewis",
+    "email": "ethanlewis@gmail.com",
+    "role": "Student",
+    "password": "Ethan123"
+  },
+  {
+    "id": "16",
+    "username": "Amelia Robinson",
+    "email": "ameliarobinson@gmail.com",
+    "role": "Teacher",
+    "password": "Ameliapass"
+  },
+  {
+    "id": "17",
+    "username": "Liam Walker",
+    "email": "liamwalker@gmail.com",
+    "role": "Admin",
+    "password": "Liampass"
+  },
+  {
+    "id": "18",
+    "username": "Harper Lewis",
+    "email": "harperlewis@gmail.com",
+    "role": "Student",
+    "password": "Harperpass"
+  },
+  {
+    "id": "19",
+    "username": "Elijah Young",
+    "email": "elijahyung@gmail.com",
+    "role": "Teacher",
+    "password": "Elijahpass"
+  },
+  {
+    "id": "20",
+    "username": "Avery Allen",
+    "email": "averyallen@gmail.com",
+    "role": "Admin",
+    "password": "Averypass"
+  },
+  {
+    "id": "21",
+    "username": "Henry",
+    "email": "henry@gmail.com",
+    "role": "Admin",
+    "password": "admin"
+  }
+]

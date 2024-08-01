@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "name": "TimeTable",
+    "details": [
+      {
+        "day": "Monday",
+        "subject": "Mathematics",
+        "startTime": "15:38",
+        "endTime": "16:38",
+        "id": 1
+      }
+    ]
+  }
+]

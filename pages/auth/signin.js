@@ -1,68 +1,80 @@
-// /pages/auth/signin.js
-import { signIn, useSession } from "next-auth/react";
-import { useState } from "react";
-import { useRouter } from "next/router";
+// pages/auth/signin.js
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/react';
+import Head from 'next/head';
 
 export default function SignIn() {
-  const [identifier, setIdentifier] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const router = useRouter();
-  const { data: session } = useSession();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-
-    const result = await signIn("credentials", {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    const result = await signIn('credentials', {
       redirect: false,
-      identifier,
-      password,
+      email,
+      password
     });
 
     if (result.error) {
       setError(result.error);
     } else {
-      // Redirect to dashboard or any other page on successful sign-in
-      router.push("/admin/dashboard");
+      // Ensure user object is defined and has role property
+      const user = result?.user || {};
+      const { role } = user;
+
+      if (role === 'student') {
+        router.push('/'); // Redirect student to the index page
+      } else {
+        router.push('/admin/dashboard'); // Redirect admin or teacher to the dashboard
+      }
     }
   };
 
-  if (session) {
-    router.push("/admin/dashboard");
-    return null; // Prevent rendering of the sign-in page
-  }
-
   return (
-    <div className="flex justify-center items-center h-screen">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-md"
-      >
-        <h2 className="text-2xl mb-4">Sign In</h2>
-        {error && <div className="text-red-500 mb-4">{error}</div>}
-        <div className="mb-4">
-          <input
-            type="text"
-            value={identifier}
-            onChange={(e) => setIdentifier(e.target.value)}
-            placeholder="Email or Username"
-            className="w-full p-2 border border-gray-300 rounded"
-          />
+    <>
+      <Head>
+        <title>Sign In</title>
+      </Head>
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+          <h1 className="text-2xl font-bold mb-6">Sign In</h1>
+          {error && <div className="text-red-500 mb-4">{error}</div>}
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-gray-700">Email</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="password" className="block text-gray-700">Password</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              Sign In
+            </button>
+          </form>
         </div>
-        <div className="mb-4">
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-          Sign In
-        </button>
-      </form>
-    </div>
+      </div>
+    </>
   );
 }

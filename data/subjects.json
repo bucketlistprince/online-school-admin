@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Mathematics"
+  },
+  {
+    "id": 2,
+    "name": "English"
+  },
+  {
+    "id": 3,
+    "name": "History"
+  },
+  {
+    "id": 4,
+    "name": "Biology"
+  },
+  {
+    "id": 5,
+    "name": "Chemistry"
+  },
+  {
+    "id": 6,
+    "name": "Physics"
+  },
+  {
+    "id": 7,
+    "name": "Geography"
+  },
+  {
+    "id": 8,
+    "name": "Computer Science"
+  }
+]

@@ -1,0 +1,42 @@
+// pages/api/roles/index.js
+import fs from 'fs';
+import path from 'path';
+
+const rolesFilePath = path.join(process.cwd(), 'data', 'roles.json');
+
+const readRoles = () => {
+  const fileData = fs.readFileSync(rolesFilePath, 'utf8');
+  return JSON.parse(fileData);
+};
+
+const writeRoles = (data) => {
+  fs.writeFileSync(rolesFilePath, JSON.stringify(data, null, 2));
+};
+
+export default function handler(req, res) {
+  if (req.method === 'GET') {
+    // Return the list of roles
+    const roles = readRoles();
+    res.status(200).json(roles);
+  } else if (req.method === 'POST') {
+    // Add a new role
+    const { name } = req.body;
+    if (!name) {
+      return res.status(400).json({ message: 'Role name is required' });
+    }
+
+    const roles = readRoles();
+    const newRole = {
+      id: roles.length ? Math.max(roles.map(role => role.id)) + 1 : 1,
+      name,
+    };
+
+    roles.push(newRole);
+    writeRoles(roles);
+
+    res.status(201).json(newRole);
+  } else {
+    res.setHeader('Allow', ['GET', 'POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+}

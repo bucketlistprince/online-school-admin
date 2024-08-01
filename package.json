@@ -10,11 +10,19 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "chart.js": "^4.4.3",
+    "formidable": "^2.0.1",
     "next": "14.2.4",
     "next-auth": "^4.24.7",
     "react": "^18",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
-    "react-icons": "^5.2.1"
+    "react-grid-layout": "^1.4.4",
+    "react-icons": "^5.2.1",
+    "react-modal": "^3.16.1",
+    "react-resizable": "^3.0.5",
+    "react-table": "^7.8.0",
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "eslint": "^8",
